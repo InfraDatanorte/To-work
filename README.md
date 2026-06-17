@@ -9,7 +9,7 @@ Projeto completo com:
 - Login com JWT
 - Senha criptografada com bcryptjs
 - Rota protegida `/api/auth/me`
-- Tela inicial parecida com a proposta do To Work: clientes contratam serviços e prestadores oferecem serviços
+- Tela inicial com a proposta do To Work: clientes contratam serviços e prestadores oferecem serviços
 
 ## Estrutura
 
