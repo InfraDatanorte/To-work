@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-30",
+  "source": "cópia consistente do banco local existente",
+  "originalModified": false,
+  "tables": [
+    {
+      "table": "users",
+      "before": 6,
+      "after": 6,
+      "existingRowsUnchanged": true
+    },
+    {
+      "table": "categories",
+      "before": 7,
+      "after": 153,
+      "existingRowsUnchanged": true
+    },
+    {
+      "table": "provider_profiles",
+      "before": 6,
+      "after": 6,
+      "existingRowsUnchanged": true
+    },
+    {
+      "table": "provider_categories",
+      "before": 12,
+      "after": 12,
+      "existingRowsUnchanged": true
+    }
+  ],
+  "integrity": {
+    "integrity_check": "ok"
+  },
+  "foreignKeyErrors": 0
+}

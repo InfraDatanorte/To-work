@@ -6,3 +6,9 @@ backend/data/*.sqlite-journal
 backend/data/*.sqlite-wal
 backend/data/*.sqlite-shm
 frontend/dist/
+test-results/
+playwright-report/
+*.zip
+__pycache__/
+
+backend/data/*.sqlite

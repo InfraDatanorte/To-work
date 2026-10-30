@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-30",
+  "environment": {
+    "node": "24.16.0",
+    "os": "Windows",
+    "browser": "Chromium / Playwright"
+  },
+  "checks": [
+    {
+      "name": "API tests",
+      "exitCode": 0,
+      "output": "\n> to-work@2.0.0 test\n> npm test --prefix backend\n\n\n> to-work-api@1.0.0 test\n> node --test\n\n✔ categorias, vínculos e prestadores existentes (597.5373ms)\n✔ cadastro e autenticação validam tipos, email, hash e expiração (801.5827ms)\n✔ perfil, busca sem acentos, categoria inativa e privacidade pública (53.5088ms)\n✔ fluxo completo: pedido, orçamento, aceite, conclusão e avaliação única (65.8099ms)\n✔ pedidos de terceiros, papéis e estados finais são protegidos (85.5181ms)\n✔ decisões concorrentes aplicam somente uma transição (19.7432ms)\n✔ transação desfaz alterações se uma etapa falha (3.8584ms)\n✔ conta inativa perde acesso e JSON inválido recebe resposta controlada (8.8526ms)\nℹ tests 8\nℹ suites 0\nℹ pass 8\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 1602.7922\n"
+    },
+    {
+      "name": "frontend build",
+      "exitCode": 0,
+      "output": "\n> to-work@2.0.0 build\n> npm run build --prefix frontend\n\n\n> to-work-frontend@1.0.0 build\n> vite build\n\nvite v6.4.5 building for production...\ntransforming...\n✓ 109 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   0.40 kB │ gzip:  0.27 kB\ndist/assets/index-CKS7uT33.css    4.37 kB │ gzip:  1.51 kB\ndist/assets/index-D0blQtDe.js   269.77 kB │ gzip: 88.94 kB\n✓ built in 1.47s\n"
+    },
+    {
+      "name": "root audit",
+      "exitCode": 0,
+      "output": "{\n  \"auditReportVersion\": 2,\n  \"vulnerabilities\": {},\n  \"metadata\": {\n    \"vulnerabilities\": {\n      \"info\": 0,\n      \"low\": 0,\n      \"moderate\": 0,\n      \"high\": 0,\n      \"critical\": 0,\n      \"total\": 0\n    },\n    \"dependencies\": {\n      \"prod\": 1,\n      \"dev\": 3,\n      \"optional\": 0,\n      \"peer\": 0,\n      \"peerOptional\": 0,\n      \"total\": 3\n    }\n  }\n}\n"
+    },
+    {
+      "name": "backend audit",
+      "exitCode": 0,
+      "output": "{\n  \"auditReportVersion\": 2,\n  \"vulnerabilities\": {},\n  \"metadata\": {\n    \"vulnerabilities\": {\n      \"info\": 0,\n      \"low\": 0,\n      \"moderate\": 0,\n      \"high\": 0,\n      \"critical\": 0,\n      \"total\": 0\n    },\n    \"dependencies\": {\n      \"prod\": 129,\n      \"dev\": 28,\n      \"optional\": 14,\n      \"peer\": 0,\n      \"peerOptional\": 0,\n      \"total\": 169\n    }\n  }\n}\n"
+    },
+    {
+      "name": "frontend audit",
+      "exitCode": 0,
+      "output": "{\n  \"auditReportVersion\": 2,\n  \"vulnerabilities\": {},\n  \"metadata\": {\n    \"vulnerabilities\": {\n      \"info\": 0,\n      \"low\": 0,\n      \"moderate\": 0,\n      \"high\": 0,\n      \"critical\": 0,\n      \"total\": 0\n    },\n    \"dependencies\": {\n      \"prod\": 93,\n      \"dev\": 0,\n      \"optional\": 52,\n      \"peer\": 0,\n      \"peerOptional\": 0,\n      \"total\": 144\n    }\n  }\n}\n"
+    }
+  ],
+  "browser": {
+    "passed": 4,
+    "failed": 0,
+    "durationSeconds": 10.618701999999999
+  },
+  "documents": {
+    "pages": 41,
+    "figures": 15,
+    "tables": 11,
+    "functionalRequirements": 25,
+    "nonFunctionalRequirements": 12,
+    "allExpectedContentFound": true
+  },
+  "catalog": {
+    "standardCategories": 152,
+    "groups": 12,
+    "localCategories": 153,
+    "existingDataPreserved": true,
+    "idempotent": true,
+    "professionSearchTested": true,
+    "multipleCategoriesTested": true
+  }
+}

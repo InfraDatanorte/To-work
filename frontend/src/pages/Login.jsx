@@ -1,52 +1,68 @@
+/*
+  Login.jsx
+  -----------------------------------------------------------------------------
+  Tela de login.
+
+  Fluxo:
+  1. usuário digita email e senha;
+  2. o formulário chama a função entrar();
+  3. entrar() chama login() do AuthContext;
+  4. AuthContext envia POST /api/auth/login;
+  5. se der certo, o usuário vai para /dashboard.
+*/
+
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
+import AuthAside from '../components/AuthAside.jsx';
+import Icon from '../components/Icon.jsx';
 
 export default function Login() {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, user } = useAuth();
+  const location = useLocation();
+  const from = location.state?.from;
+  const destino = typeof from === 'string' && from.startsWith('/') && !from.startsWith('//') && !['/login', '/register'].includes(from) ? from : '/dashboard';
 
-  const [form, setForm] = useState({ email: '', password: '' });
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [busy, setBusy] = useState(false);
 
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setForm((currentForm) => ({ ...currentForm, [name]: value }));
-  }
-
-  async function handleSubmit(event) {
+  async function entrar(event) {
+    // Evita o recarregamento padrão do formulário HTML.
     event.preventDefault();
     setError('');
-    setLoading(true);
+    setBusy(true);
 
     try {
-      await login(form);
-      navigate('/dashboard');
-    } catch (apiError) {
-      setError(apiError.response?.data?.message || 'Não foi possível fazer login.');
-    } finally {
-      setLoading(false);
-    }
+      await login(email, password);
+      navigate(destino, { replace: true });
+    } catch (erro) {
+      setError(erro.response?.data?.message || 'Não foi possível fazer login.');
+    } finally { setBusy(false); }
   }
 
+  if (user) return <Navigate to={destino} replace />;
   return (
     <div className="auth-page">
-      <form className="auth-card" onSubmit={handleSubmit}>
+      <AuthAside />
+      <form className="auth-card" onSubmit={entrar}>
+        <Link className="auth-back" to="/"><Icon name="back" size={15} /> Voltar para o início</Link>
         <span className="eyebrow">Bem-vindo de volta</span>
         <h1>Entrar na conta</h1>
         <p>Acesse sua conta para continuar usando a plataforma.</p>
 
-        {error && <div className="alert alert-error">{error}</div>}
+        {error && <div className="alert" role="alert">{error}</div>}
 
         <label>
           Email
           <input
-            name="email"
             type="email"
-            placeholder="seuemail@exemplo.com"
-            value={form.email}
-            onChange={handleChange}
+            autoComplete="email"
+            maxLength={254}
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
             required
           />
         </label>
@@ -54,21 +70,18 @@ export default function Login() {
         <label>
           Senha
           <input
-            name="password"
             type="password"
-            placeholder="Sua senha"
-            value={form.password}
-            onChange={handleChange}
+            autoComplete="current-password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
             required
           />
         </label>
 
-        <button className="btn btn-primary btn-full" type="submit" disabled={loading}>
-          {loading ? 'Entrando...' : 'Entrar'}
-        </button>
+        <button className="btn btn-primary btn-full" disabled={busy}>{busy ? 'Entrando...' : 'Entrar'}</button>
 
-        <p className="auth-footer">
-          Ainda não tem conta? <Link to="/register">Criar conta</Link>
+        <p className="form-footer">
+          Ainda não tem conta? <Link to="/register" state={{ from: destino }}>Criar conta</Link>
         </p>
       </form>
     </div>

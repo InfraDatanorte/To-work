@@ -1,0 +1,15 @@
+{
+  "name": "to-work",
+  "version": "2.0.0",
+  "private": true,
+  "description": "To Work - projeto acadêmico de serviços",
+  "engines": { "node": ">=22.13.0" },
+  "scripts": {
+    "setup": "npm install --prefix backend && npm install --prefix frontend",
+    "dev": "node scripts/dev.js",
+    "test": "npm test --prefix backend",
+    "test:e2e": "playwright test",
+    "build": "npm run build --prefix frontend"
+  },
+  "devDependencies": { "@playwright/test": "^1.58.0" }
+}

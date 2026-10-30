@@ -1,3 +1,28 @@
+CREATE TABLE IF NOT EXISTS service_requests (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  client_id INTEGER NOT NULL REFERENCES users(id),
+  provider_id INTEGER NOT NULL REFERENCES provider_profiles(id),
+  category_id INTEGER NOT NULL REFERENCES categories(id),
+  title TEXT NOT NULL,
+  description TEXT NOT NULL,
+  city TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'PENDENTE'
+    CHECK (status IN ('PENDENTE', 'ORCADO', 'ACEITO', 'CONCLUIDO', 'RECUSADO', 'CANCELADO')),
+  quote_cents INTEGER CHECK (quote_cents > 0),
+  quote_message TEXT,
+  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXISTS reviews (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  request_id INTEGER NOT NULL UNIQUE REFERENCES service_requests(id),
+  rating INTEGER NOT NULL CHECK (rating BETWEEN 1 AND 5),
+  comment TEXT NOT NULL,
+  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS idx_requests_client ON service_requests(client_id);
+CREATE INDEX IF NOT EXISTS idx_requests_provider ON service_requests(provider_id);
+
 CREATE TABLE IF NOT EXISTS users (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   full_name TEXT NOT NULL,
@@ -36,6 +61,7 @@ CREATE TABLE IF NOT EXISTS provider_categories (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   provider_id INTEGER NOT NULL,
   category_id INTEGER NOT NULL,
+  status TEXT NOT NULL DEFAULT 'ATIVO' CHECK (status IN ('ATIVO', 'INATIVO')),
   created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
   UNIQUE (provider_id, category_id),
   FOREIGN KEY (provider_id) REFERENCES provider_profiles(id) ON DELETE CASCADE,

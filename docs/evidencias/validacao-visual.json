@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-30",
+  "scope": "revisao visual",
+  "browserTests": {
+    "passed": 4,
+    "failed": 0,
+    "durationMs": 9996.281
+  },
+  "build": "aprovado",
+  "widths": [
+    320,
+    390,
+    768,
+    1366
+  ],
+  "newDependencies": 0,
+  "flowsPreserved": [
+    "cadastro",
+    "login",
+    "busca",
+    "perfil",
+    "solicitacao",
+    "orcamento",
+    "aceite",
+    "conclusao",
+    "avaliacao"
+  ]
+}

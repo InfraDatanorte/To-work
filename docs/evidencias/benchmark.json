@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-30",
+  "node": "v24.16.0",
+  "sqlite": "3.52.0",
+  "platform": "win32 10.0.19045",
+  "providers": 100,
+  "mode": "HTTP local, sequencial, 5 aquecimentos e 50 amostras por rota; inclui leitura do JSON",
+  "results": [
+    {
+      "route": "/health",
+      "samples": 50,
+      "medianMs": 2.12,
+      "p95Ms": 6.58,
+      "maxMs": 15.47
+    },
+    {
+      "route": "/professionals",
+      "samples": 50,
+      "medianMs": 6.01,
+      "p95Ms": 20.29,
+      "maxMs": 23.11
+    },
+    {
+      "route": "/professionals?q=eletrica&city=sinop",
+      "samples": 50,
+      "medianMs": 4.85,
+      "p95Ms": 9.82,
+      "maxMs": 12.32
+    }
+  ]
+}
